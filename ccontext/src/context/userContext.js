@@ -1,8 +1,6 @@
 import React, { createContext } from "react";
 
-const user =React.createContext();
+const UserContext =React.createContext();
 
 
-
-
-export default user;
+export default UserContext;
