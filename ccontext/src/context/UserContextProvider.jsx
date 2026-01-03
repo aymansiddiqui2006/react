@@ -3,9 +3,6 @@ import {  useState } from "react";
 import UserContext from "./User_Context";
 
 
-
-
-
 const UserContextProvider=({children})=>{
     const [user,setuser]=useState({});
     return(
