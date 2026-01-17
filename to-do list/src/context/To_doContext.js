@@ -14,8 +14,8 @@ export const To_doContext=createContext({
        tooglecomplete:(id)=>{},
 })
 
-export const useToDo=()=>{
+export const UseToDo=()=>{
     return useContext(To_doContext)
 }
 
-export const todoProvider=To_doContext.Provider
+export const TodoProvider=To_doContext.Provider
