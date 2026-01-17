@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { TodoProvider } from './context'
+import { TodoProvider } from './context/To_doContext'
 import './App.css'
+import { useEffect } from 'react'
+import ToDoForm from './components/ToDoForm'
+import ToDoItem from './components/ToDoItem'
 
 function App() {
   const [todos, settodos] = useState([])
   const addTodo = (todo) => {
-    settodos((prev) => [...prev, { id: date.now(), ...todo }])
+    settodos((prev) => [...prev, { id: Date.now(), ...todo }])
   }
   const updateTodo = (id, todo) => {
     settodos((prev) => prev.map((prevtodo) => (prevtodo.id === id ? todo : prevtodo)))
@@ -14,22 +17,40 @@ function App() {
     settodos((prev) => prev.filter((todo) => todo.id !== id))
   }
   const tooglecomplete = (id) => {
-    settodos((prev) => prev.map((prevtodo) => prevtodo === id ? { ...prevtodo, completed: !prevtodo.completed } : prevtodo))
+    settodos((prev) => prev.map((prevtodo) => prevtodo.id === id ? { ...prevtodo, completed: !prevtodo.completed } : prevtodo))
   }
+
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"))
+    if (todos && todos.length > 0) {
+      settodos(todos)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
+
 
   return (
     <TodoProvider value={{ todos, addTodo, updateTodo, deleteTodo, tooglecomplete }}>
-      <div className="bg-gray-600 h-screen w-screen flex flex-col">
-        <div className="text-4xl font-bold font-mono text-white flex justify-center mt-8 mb-8 ">
-          Manage your todo
+      <div className="bg-[#172842] min-h-screen py-8">
+        <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
+          <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
+          <div className="mb-4">
+            {/* Todo form goes here */}
+            <ToDoForm/>
+          </div>
+          <div className="flex flex-wrap gap-y-3">
+            {/*Loop and Add TodoItem here */}
+            {todos.map((todo)=>(
+              <div key={todo.id} className='w-full'>
+                <ToDoItem todo={todo}/>  
+              </div>
+            ))}
+          </div>
         </div>
-        <div>
-
-        </div>
-        <div className="flex fexl-wrap gap-y-3">
-
-        </div>
-
       </div>
     </TodoProvider>
   )
