@@ -1,4 +1,4 @@
-import conf from "../config/config";
+import config from "../config/config";
 import { Client, Account, ID } from "appwrite";
 
 export class AuthService {
@@ -7,8 +7,8 @@ export class AuthService {
 
     constructor() {
         this.client
-            .setEndpoint(conf.appwriteurl)
-            .setProject(conf.appwriteprojectid);
+            .setEndpoint(config.appwriteurl)
+            .setProject(config.appwriteprojectid);
 
         this.account = new Account(this.client);
     }
