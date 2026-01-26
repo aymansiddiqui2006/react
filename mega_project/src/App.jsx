@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import authService from './appwrite/auth'
 import { login, logout } from './config/store/authSlice'
 import Header from './component/header/header'
 import Footer from './component/footer/footer'
-import {Outlet}from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   const [loading, setload] = useState(true)
@@ -23,18 +23,18 @@ function App() {
     })
   }, [])
 
-  return !loading?(
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+  return !loading ? (
+    <div className='min-h-screen flex flex-wrap content-between bg-gray-300'>
       <div className='w-full block'>
-        <Header/>
+        <Header />
         <main>
-          <Outlet/>
+          <Outlet />
         </main>
-        <Footer/>
+        <Footer />
       </div>
     </div>
-  ):null
-  
+  ) : null
+
 }
 
 export default App
